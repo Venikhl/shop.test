@@ -8,6 +8,10 @@
             {{__('Dashboard')}}
         </x-partials.navbar.link>
 
+        <x-partials.navbar.link href="{{ route('admin.categories.index') }}">
+            {{__('Categories')}}
+        </x-partials.navbar.link>
+
     </x-partials.navbar>
 
     <div class="container mt-3">

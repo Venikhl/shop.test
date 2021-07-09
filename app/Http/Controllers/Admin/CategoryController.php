@@ -11,12 +11,17 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        //
+        $categories = Category::query()
+            ->paginate(5);
+
+        return view('admin.categories.index', [
+            'categories' => $categories,
+        ]);
     }
 
     public function create()
     {
-        //
+        return view('admin.categories.form');
     }
 
     public function store(CategoryRequest $request)
@@ -29,12 +34,16 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        //
+        return view('admin.categories.show', [
+            'category' => $category,
+        ]);
     }
 
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.form', [
+            'category' => $category,
+        ]);
     }
 
     public function update(CategoryRequest $request, Category $category)
