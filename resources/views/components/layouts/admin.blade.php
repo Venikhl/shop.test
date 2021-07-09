@@ -11,9 +11,23 @@
     </x-partials.navbar>
 
     <div class="container mt-3">
+    @if($title || $toolbar ?? false)
 
-        <h1>{{ $title }}</h1>
+        <div class="d-flex align-items-center mb-3">
 
+            @if($title)
+                <h1 class="h3 mb-0">{{ $title }}</h1>
+            @endif
+
+            @if($toolbar ?? false)
+                <div class="d-flex align-items-center ms-auto">
+                    {{ $toolbar }}
+                </div>
+            @endif
+
+        </div>
+        @endif
         {{ $slot }}
     </div>
+
 </x-layouts.base>
