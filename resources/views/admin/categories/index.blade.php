@@ -46,6 +46,8 @@
 
         @endforeach
 
+        {{ $categories->links() }}
+
     @endif
 
 </x-layouts.admin>
