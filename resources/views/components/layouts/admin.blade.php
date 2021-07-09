@@ -5,7 +5,7 @@
     <x-partials.navbar>
 
         <x-partials.navbar.link href="{{ url('/') }}">
-            {{__('Home')}}
+            {{__('Admin panel')}}
         </x-partials.navbar.link>
 
     </x-partials.navbar>
