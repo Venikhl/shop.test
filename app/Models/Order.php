@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'address', 'products'
+    ];
+
+    protected $casts = [
+        'products' =>'json'
+    ];
+
+    function user(){
+        return $this->belongsTo(User::class);
+    }
 }

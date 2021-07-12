@@ -39,8 +39,8 @@
 
             </table>
 
-            <a href="#" class="ms-auto btn btn-success">
-                {{ __('Proceed checkout') }}
+            <a href="{{ route('orders.create') }}" class="ms-auto btn btn-success">
+                {{ __('Proceed orders') }}
             </a>
         </div>
     @endif
