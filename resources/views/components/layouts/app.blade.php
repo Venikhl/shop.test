@@ -10,10 +10,10 @@
 
         @auth
             <x-slot name="userBar">
-                <x-partials.navbar.link href="#">
+                <x-partials.navbar.link href="{{ route('cart.index') }}">
                     {{__('Cart')}}
                     <span class="badge bg-secondary">
-                    {{ auth()->user()->cart_count }}
+                        {{ auth()->user()->cart_count }}
                     </span>
                 </x-partials.navbar.link>
             </x-slot>
