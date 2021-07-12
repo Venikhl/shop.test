@@ -6,8 +6,14 @@
             {{ $slot }}
         </ul>
 
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav">
+
+            @if($userBar ?? false)
+                {{ $userBar }}
+            @endif
+
             @auth
+
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" role="button" id="user_dropdown" data-bs-toggle="dropdown">
                         {{ auth()->user()->name }}
@@ -36,6 +42,7 @@
                     </a>
                 </li>
             @endauth
+
         </ul>
     </div>
 </nav>

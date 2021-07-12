@@ -8,6 +8,16 @@
             {{__('Home')}}
         </x-partials.navbar.link>
 
+        @auth
+            <x-slot name="userBar">
+                <x-partials.navbar.link href="#">
+                    {{__('Cart')}}
+                    <span class="badge bg-secondary">
+                    {{ auth()->user()->cart_count }}
+                    </span>
+                </x-partials.navbar.link>
+            </x-slot>
+        @endauth
     </x-partials.navbar>
 
     <div class="container mt-3">
