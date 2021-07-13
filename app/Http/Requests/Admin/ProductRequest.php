@@ -15,7 +15,15 @@ class ProductRequest extends FormRequest
                 'nullable', Rule::exists((new Category)->getTable(), 'id')
             ],
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string']
+            'description' => ['nullable', 'string'],
+            'price' => ['required', 'numeric', 'min:0.01']
         ];
+    }
+
+    function validated()
+    {
+        $data = parent::validated();
+        $data['price'] = (int)($this->price * 100);
+        return $data;
     }
 }

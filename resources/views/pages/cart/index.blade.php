@@ -12,6 +12,8 @@
                     <tr>
                         <th width="100%">{{__('Name')}}</th>
                         <th>{{__('Amount')}}</th>
+                        <th>{{__('Price for one')}}</th>
+                        <th>{{__('Price total')}}</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -24,6 +26,12 @@
                         </td>
                         <td>
                             {{ $c->amount }}
+                        </td>
+                        <td>
+                            {{ $c->product->calculate() }}
+                        </td>
+                        <td>
+                            {{ $c->product->calculate($c->amount) }}
                         </td>
                         <td>
                             <form action="{{ route('cart.destroy', $c) }}" method="post">

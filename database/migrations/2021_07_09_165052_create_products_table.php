@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
 
             $table->string('name');
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('price')->default(0);
             $table->timestamps();
         });
     }
