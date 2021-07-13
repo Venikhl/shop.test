@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\CartController;
 use \App\Http\Middleware\EnsureCartIsNotEmpty;
 use \App\Http\Controllers\OrderController;
+use \App\Http\Controllers\ProductController;
 
 Route::view('/', 'pages.index');
 
@@ -32,3 +33,6 @@ Route::middleware(['auth'])
             ->only('show');
 
     });
+
+Route::resource('products', ProductController::class)
+    ->only('index', 'show');

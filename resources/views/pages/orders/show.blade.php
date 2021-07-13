@@ -4,36 +4,40 @@
         {{ __('Order') }}
     </h1>
 
-    <div class="card">
-        <div class="list-group list-group-flush">
-
-            <div class="list-group list-group-flush">
-                <div class="list-group-item">
-                    <small class="text-secondary">{{ __('Address') }}</small>
-                    <div>{{ $order->address }}</div>
-                </div>
-            </div>
-
-            <div class="card-header">
-                {{__('Products') }}
-            </div>
-
+    <div class="row">
+        <div class="col">
             @foreach($orderProducts as $orderProduct)
-                <div class="list-group-item">
-                    @if($orderProduct['product'])
+                <div class="card my-3">
+
+                    <div class="card-body d-flex align-items-start">
                         <div>
-                            {{$orderProduct['product']->name}}
+                            @if($orderProduct['product'])
+                            <div class="fw-bold card-title">
+                                {{ $orderProduct['product']->name }}
+                            </div>
+                                @if($orderProduct['product']->description)
+                                    {{ $orderProduct['product']->description }}
+                                @endif
+                            @else
+                            DELETED
+                            @endif
                         </div>
-                        <small class="text-secondary">
-                            {{ $orderProduct['product']->description }}
-                        </small>
-                    @else
-                        <h1>DELETED</h1>
-                    @endif
+
+                        <div class="text-secondary fs-4 ms-auto d-flex align-items-center">
+                            <span class="fs-6 me-2">
+                                ${{ $orderProduct['price'] / 100 }} &times; {{ $orderProduct['amount'] }} &equals;
+                            </span>
+                            ${{ $orderProduct['total'] }}
+                        </div>
+                    </div>
                 </div>
             @endforeach
-
+        </div>
+        <div class="col-3">
+            <div class="card card-body">
+                <small class="text-secondary">{{ __('Address') }}</small>
+                <div>{{ $order->address }}</div>
+            </div>
         </div>
     </div>
-
 </x-layouts.app>

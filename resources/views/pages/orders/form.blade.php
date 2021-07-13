@@ -62,6 +62,14 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="mb-3 alert alert-secondary d-flex align-items-center justify-content-between border-0 py-2">
+                    <small>
+                        {{__('Total')}}:
+                    </small>
+                    <div class="fs-4">
+                        ${{$total}}
+                    </div>
+                </div>
 
                 <button class="btn btn-primary">
                     {{ __('Order') }}

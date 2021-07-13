@@ -1,4 +1,4 @@
-@props(['title' => null])
+@props(['title' => null, 'showCategories' => false])
 
 <x-layouts.base :title="$title" {{ $attributes }}>
 
@@ -6,6 +6,10 @@
 
         <x-partials.navbar.link href="{{ url('/') }}">
             {{__('Home')}}
+        </x-partials.navbar.link>
+
+        <x-partials.navbar.link href="{{ route('products.index') }}">
+            {{__('Products')}}
         </x-partials.navbar.link>
 
         @auth
@@ -21,6 +25,30 @@
     </x-partials.navbar>
 
     <div class="container mt-3">
-        {{ $slot }}
+        <div class="row">
+            @if($showCategories)
+                <div class="col-3">
+                    <div class="card">
+
+                        <div class="card-header">
+                            {{__('Categories')}}
+                        </div>
+
+                        <div class="list-group list-group-flush">
+                            @foreach(App\Models\Category::query()->orderBy('name')->get() as $category)
+                                <a href="#" class="list-group-item list-goup-item-action">
+                                    {{ $category->name }}
+                                </a>
+                            @endforeach
+                        </div>
+
+                    </div>
+                </div>
+            @endif
+
+            <div class="col">
+                {{ $slot }}
+            </div>
+        </div>
     </div>
 </x-layouts.base>

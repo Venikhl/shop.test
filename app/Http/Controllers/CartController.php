@@ -15,6 +15,7 @@ class CartController extends Controller
             ->get();
 
         $sum = 0;
+
         $cart->each(function (Cart $cart) use (&$sum){
             $sum += $cart->product->calculate($cart->amount);
         });
