@@ -36,7 +36,7 @@
 
                         <div class="list-group list-group-flush">
                             @foreach(App\Models\Category::query()->orderBy('name')->get() as $category)
-                                <a href="#" class="list-group-item list-goup-item-action">
+                                <a href="{{ route('categories.show', $category) }}" class="list-group-item list-goup-item-action">
                                     {{ $category->name }}
                                 </a>
                             @endforeach

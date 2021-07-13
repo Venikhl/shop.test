@@ -5,8 +5,9 @@ use \App\Http\Controllers\CartController;
 use \App\Http\Middleware\EnsureCartIsNotEmpty;
 use \App\Http\Controllers\OrderController;
 use \App\Http\Controllers\ProductController;
+use \App\Http\Controllers\CategoryController;
 
-Route::view('/', 'pages.index');
+Route::redirect('/', 'products');
 
 Route::middleware('auth')
     ->prefix('cart')
@@ -36,3 +37,6 @@ Route::middleware(['auth'])
 
 Route::resource('products', ProductController::class)
     ->only('index', 'show');
+
+Route::resource('categories', CategoryController::class)
+    ->only('show');
