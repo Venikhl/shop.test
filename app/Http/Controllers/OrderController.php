@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
+use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -26,10 +28,12 @@ class OrderController extends Controller
 
     function store(OrderRequest $request){
         $cart = $this->getCart();
-        $products = $cart->groupBy('product.id')
-            ->map(function (Collection $collection){
+
+        $products = $cart
+            ->map(function (Cart $cart){
                 return [
-                    'amount' => $collection->first()->amount,
+                    'product_id' => $cart->product->id,
+                    'amount' => $cart->amount,
                 ];
             });
 
@@ -46,8 +50,24 @@ class OrderController extends Controller
     }
 
     function show(Order $order){
+
+        $orderProducts = collect($order->products);
+        $ids = $orderProducts->pluck('product_id');
+
+        $products = Product::query()
+            ->whereIn('id', $ids)
+            ->get();
+
+        $orderProducts = $orderProducts->map(function ($data) use ($products) {
+            return [
+                'amount' => $data['amount'],
+                'product' => $products->where('id', $data['product_id'])->first()
+            ];
+        });
+
         return view('pages.orders.show', [
-            'order' => $order
+            'order' => $order,
+            'orderProducts' => $orderProducts
         ]);
     }
 }
