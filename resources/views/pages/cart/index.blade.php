@@ -12,8 +12,8 @@
                     <tr>
                         <th width="100%">{{__('Name')}}</th>
                         <th>{{__('Amount')}}</th>
-                        <th>{{__('Price for one')}}</th>
-                        <th>{{__('Price total')}}</th>
+                        <th>{{__('Price')}}</th>
+                        <th>{{__('Total')}}</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -24,14 +24,14 @@
                         <td>
                             {{ $c->product->name }}
                         </td>
-                        <td>
+                        <td class="text-end">
                             {{ $c->amount }}
                         </td>
-                        <td>
-                            {{ $c->product->calculate() }}
+                        <td class="text-end">
+                            ${{ $c->product->calculate() }}
                         </td>
-                        <td>
-                            {{ $c->product->calculate($c->amount) }}
+                        <td class="text-end">
+                            ${{ $c->product->calculate($c->amount) }}
                         </td>
                         <td>
                             <form action="{{ route('cart.destroy', $c) }}" method="post">
@@ -43,8 +43,12 @@
                         </td>
                     </tr>
                 @endforeach
+                <tr>
+                    <td colspan="3"></td>
+                    <td class="text-end">${{ $total }}</td>
+                    <td></td>
+                </tr>
                 </tbody>
-
             </table>
 
             <a href="{{ route('orders.create') }}" class="ms-auto btn btn-success">

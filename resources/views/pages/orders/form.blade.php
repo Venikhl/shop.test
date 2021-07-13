@@ -7,28 +7,49 @@
     <div class="row">
 
         <div class="col-8">
-            <div class="card">
 
-                <div class="list-group list-group-flush">
-                    @foreach($cart as $c)
-                        <div class="list-group-item">
-                            <div>
-                                {{$c->product->name}}
+            @foreach($cart as $c)
+                <div class="card my-3">
 
-                                @if($c->product->category)
-                                    <span class="badge bg-secondary">
-                                        {{ $c->product->category->name }}
-                                    </span>
-                                @endif
+                    <div class="card-body d-flex align-items-start">
+                        <div>
+                            <div class="fw-bold card-title">
+                                {{ $c->product->name }}
                             </div>
-                            <small class="text-secondary">
-                                {{$c->product->description}}
-                            </small>
-                        </div>
-                    @endforeach
-                </div>
 
-            </div>
+                            {{ $c->product->description }}
+                        </div>
+
+                        <div class="text-secondary fs-4 ms-auto d-flex align-items-center">
+                            <span class="fs-6 me-2">
+                                ${{ $c->product->calculate() }} &times; {{ $c->amount }} &equals;
+                            </span>
+                            ${{ $c->product->calculate($c->amount) }}
+                        </div>
+                    </div>
+
+                    <div class="card-footer d-flex align-items-center">
+
+                        @if($c->product->category)
+                            <a class="me-2" href="#">
+                            <span class="badge bg-secondary">
+                                {{ $c->product->category->name }}
+                            </span>
+                            </a>
+                        @endif
+
+                        <small class="text-secondary me-auto">
+                            {{ $c->created_at->diffForHumans() }}
+                        </small>
+
+                        <a href="#" class="btn btn-sm btn-outline-primary border-0">
+                            {{ __('View') }}
+                        </a>
+                    </div>
+
+                </div>
+            @endforeach
+
         </div>
         <div class="col-4">
             <form action="{{ route('orders.store') }}" class="card card-body" method="post">
