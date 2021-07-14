@@ -5,6 +5,7 @@ use \App\Http\Controllers\Admin\CategoryController;
 use \Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\ProductController;
 use \App\Http\Controllers\Admin\OrderController;
+use \App\Http\Controllers\Admin\PromocodeController;
 
 Route::get('/', DashboardController::class)
     ->name('dashboard');
@@ -17,3 +18,6 @@ Route::resource('orders', OrderController::class)
 Route::put('orders/{order}/approve', [OrderController::class, 'approve'])
     ->middleware('auth')
     ->name('orders.approve');
+
+Route::resource('promocodes', PromocodeController::class)
+    ->except('show');

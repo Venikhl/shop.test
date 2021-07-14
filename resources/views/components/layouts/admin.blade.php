@@ -20,6 +20,10 @@
             {{__('Orders')}}
         </x-partials.navbar.link>
 
+        <x-partials.navbar.link href="{{ route('admin.promocodes.index') }}">
+            {{__('Promocodes')}}
+        </x-partials.navbar.link>
+
     </x-partials.navbar>
 
     <div class="container mt-3">

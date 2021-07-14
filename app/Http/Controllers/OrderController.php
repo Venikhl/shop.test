@@ -42,6 +42,7 @@ class OrderController extends Controller
                 return [
                     'product_id' => $cart->product->id,
                     'amount' => $cart->amount,
+                    'discount' => session()->get('discount'),
                     'price' => $cart->product->price,
                 ];
             });
@@ -54,6 +55,8 @@ class OrderController extends Controller
         auth()->user()
             ->cart()
             ->delete();
+
+        session()->remove('discount');
 
         auth()->user()->notify( new OrderCreated($order) );
         return redirect()->route('orders.show', $order);
@@ -73,6 +76,7 @@ class OrderController extends Controller
                 'amount' => $data['amount'],
                 'product' => $products->where('id', $data['product_id'])->first(),
                 'price' => $data['price'],
+                'discount' => session()->get('discount'),
                 'total' => $data['price'] * $data['amount']
             ];
         });

@@ -62,12 +62,25 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
+                @if(session()->has('discount'))
+                    <div class="mb-3 d-flex align-items-center justify-content-between">
+                        <small>
+                            {{ __('Discount') }}
+                        </small>
+
+                        <div class="fs-4">
+                            {{ session()->get('discount') * 100 }}%
+                        </div>
+                    </div>
+                @endif
+
                 <div class="mb-3 alert alert-secondary d-flex align-items-center justify-content-between border-0 py-2">
                     <small>
                         {{__('Total')}}:
                     </small>
                     <div class="fs-4">
-                        ${{$total}}
+                        ${{$total * (1 - session()->get('discount'))}}
                     </div>
                 </div>
 
