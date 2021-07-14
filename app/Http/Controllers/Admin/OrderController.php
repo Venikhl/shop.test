@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Notifications\OrderApproved;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -35,6 +36,9 @@ class OrderController extends Controller
         $order->update([
             'is_approved' => true
         ]);
+
+        $order->user->notify(new OrderApproved($order));
+
         return back();
     }
 }
