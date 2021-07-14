@@ -30,4 +30,11 @@ class OrderController extends Controller
         $order->delete();
         return redirect()->route('admin.orders.index');
     }
+
+    function approve(Order $order){
+        $order->update([
+            'is_approved' => true
+        ]);
+        return back();
+    }
 }

@@ -35,8 +35,29 @@
         </div>
         <div class="col-3">
             <div class="card card-body">
+
+                @if($order->is_approved)
+                    <div class="alert alert-success mb-3">
+                        {{ __('This order is approved') }}
+                    </div>
+                @else
+                    <div class="alert alert-warning mb-3">
+                        {{ __('This order is waiting for approval') }}
+                    </div>
+                @endif
+
                 <small class="text-secondary">{{ __('Address') }}</small>
                 <div>{{ $order->address }}</div>
+                @if(!$order->is_approved)
+                    <div class="mt-3">
+                        <form action="{{ route('admin.orders.approve', $order) }}" method="post">
+                            @csrf @method('put')
+                            <button class="btn btn-primary">
+                                {{__('Approve')}}
+                            </button>
+                        </form>
+                    </div>
+                    @endif
             </div>
         </div>
     </div>
